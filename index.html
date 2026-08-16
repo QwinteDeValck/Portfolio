@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qwinte De Valck | Multimedia & Creative Technology</title>
+  <meta name="description" content="Portfolio van Qwinte De Valck — Multimedia & Creative Technology student. Projecten rond 3D, games, web & video." />
+
+  <!-- Google Fonts: Inter + Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Tailwind CSS (via CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Eigen Tailwind configuratie: kleuren + fonts
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cobalt: '#0066ff',
+            neon: '#3b82f6',
+            ink: {
+              900: '#0b0f19',
+              800: '#111827',
+              700: '#1a2234'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Poppins', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Eigen stylesheet (glow, animaties, custom effecten) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Three.js (voor de interactieve 3D-projectviewer) via import-map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-ink-900 text-slate-200 font-sans">
+
+  <!-- ============================================================
+       STICKY HEADER
+       ============================================================ -->
+  <header id="navbar" class="fixed inset-x-0 top-0 z-[1000] transition-all duration-300">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-3">
+        <span class="logo-mark grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-extrabold text-white">
+          Q
+        </span>
+        <span class="font-display text-lg font-bold text-white">
+          Qwinte <span class="text-gradient">De Valck</span>
+        </span>
+      </a>
+
+      <!-- Desktop navigatie -->
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Hoofdnavigatie">
+        <a href="#projecten" class="nav-link">Projecten</a>
+        <a href="#over-mij" class="nav-link">Over Mij</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Hamburger (mobiel) -->
+      <button id="menu-toggle" class="flex flex-col gap-[5px] p-2 md:hidden" aria-label="Menu openen" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobiel menu -->
+    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobiel menu">
+      <a href="#projecten" class="mobile-link">Projecten</a>
+      <a href="#over-mij" class="mobile-link">Over Mij</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO (minimalistisch & direct)
+         ============================================================ -->
+    <section id="home" class="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-32">
+      <!-- Achtergronddecoratie -->
+      <div class="bg-decor" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="grid-bg"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-3xl text-center">
+        <span class="badge">
+          <i class="fa-solid fa-graduation-cap"></i> Erasmushogeschool Brussel
+        </span>
+
+        <!-- Headline -->
+        <h1 class="hero-title">
+          Multimedia & <span class="text-gradient">Creative Technology</span> Student
+        </h1>
+
+        <!-- Focus op 3D, Games & Web -->
+        <p class="mt-4 text-lg font-semibold tracking-wide text-neon">
+          3D <span class="text-slate-500">·</span> Games <span class="text-slate-500">·</span> Web
+        </p>
+
+        <!-- Intro -->
+        <p class="mx-auto mt-5 max-w-xl text-slate-400">
+          Ik maak <span id="typed" class="font-semibold text-white"></span><span class="caret" aria-hidden="true"></span>.
+          Gepassioneerd door interactieve media, game development en alles wat technologie en creativiteit samenbrengt.
+        </p>
+
+        <!-- Knoppen -->
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <a href="#projecten" class="btn btn-primary">
+            <i class="fa-solid fa-rocket"></i> Bekijk Mijn Werk
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <i class="fa-solid fa-paper-plane"></i> Contact
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOOFDFOCUS: INTERACTIEVE PROJECTEN SHOWCASE
+         ============================================================ -->
+    <section id="projecten" class="px-5 py-24">
+      <div class="mx-auto max-w-6xl">
+        <header class="section-head">
+          <span class="section-tag"><i class="fa-solid fa-diagram-project"></i> Mijn Werk</span>
+          <h2 class="section-title">Geselecteerde <span class="text-gradient">projecten</span></h2>
+          <p class="section-sub">Een selectie van games, 3D-creaties, websites, video's en designs.</p>
+        </header>
+
+        <!-- Filterknoppen -->
+        <div id="filters" class="mb-12 flex flex-wrap justify-center gap-3" role="tablist" aria-label="Projecten filteren">
+          <button class="filter-btn active" data-filter="all">Alles</button>
+          <button class="filter-btn" data-filter="3d">3D & Games</button>
+          <button class="filter-btn" data-filter="web">Web & Code</button>
+          <button class="filter-btn" data-filter="video">Video & Motion</button>
+          <button class="filter-btn" data-filter="design">Design & UX</button>
+        </div>
+
+        <!-- Projecten raster (wordt ingevuld door script.js) -->
+        <div id="projects-grid" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         OVER MIJ & TOOLKIT (compact, geen CV)
+         ============================================================ -->
+    <section id="over-mij" class="section-alt px-5 py-24">
+      <div class="mx-auto max-w-6xl">
+        <header class="section-head">
+          <span class="section-tag"><i class="fa-solid fa-user"></i> Over Mij</span>
+          <h2 class="section-title">Wie ik ben & <span class="text-gradient">mijn toolkit</span></h2>
+        </header>
+
+        <div class="grid gap-12 lg:grid-cols-2">
+          <!-- Korte bio -->
+          <div class="reveal">
+            <h3 class="font-display text-2xl font-bold text-white">Creëren met technologie, dat is mijn ding.</h3>
+            <p class="mt-4 text-slate-400">
+              Ik ben <strong class="text-white">Qwinte De Valck</strong>, een Multimedia & Creative Technology
+              student aan de Erasmushogeschool Brussel. Ik hou van videogames, 3D design, interactieve
+              ervaringen en programmeren — en van alles wat daartussen ligt.
+            </p>
+            <p class="mt-3 text-slate-400">
+              Mijn aanpak is simpel: ideeën omzetten in werkende, visueel sterke creaties. Van een 3D-wereld
+              in Unity tot een strakke website of een sfeervolle motion video. Altijd met oog voor detail,
+              performance en beleving.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="pill"><i class="fa-solid fa-lightbulb"></i> Creatief & innovatief</span>
+              <span class="pill"><i class="fa-solid fa-book-open"></i> Leergierig</span>
+              <span class="pill"><i class="fa-solid fa-puzzle-piece"></i> Probleemoplossend</span>
+              <span class="pill"><i class="fa-solid fa-people-group"></i> Teamspeler</span>
+            </div>
+          </div>
+
+          <!-- Toolkit grid -->
+          <div class="reveal">
+            <h3 class="mb-5 font-display text-xl font-bold text-white">
+              <i class="fa-solid fa-screwdriver-wrench text-cobalt"></i> Tools & software
+            </h3>
+            <div class="grid grid-cols-3 gap-4 sm:grid-cols-4">
+              <div class="tool"><i class="fa-solid fa-cubes"></i><span>Blender</span></div>
+              <div class="tool"><i class="fa-solid fa-dice-d6"></i><span>Maya</span></div>
+              <div class="tool"><i class="fa-solid fa-gamepad"></i><span>Unity</span></div>
+              <div class="tool"><i class="fa-solid fa-headset"></i><span>VR / XR</span></div>
+              <div class="tool"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+              <div class="tool"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+              <div class="tool"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+              <div class="tool"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+              <div class="tool"><i class="fa-solid fa-film"></i><span>After Effects</span></div>
+              <div class="tool"><i class="fa-solid fa-clapperboard"></i><span>Premiere Pro</span></div>
+              <div class="tool"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Photoshop</span></div>
+              <div class="tool"><i class="fa-solid fa-sliders"></i><span>DaVinci Resolve</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT & SOCIALS
+         ============================================================ -->
+    <section id="contact" class="px-5 py-24">
+      <div class="mx-auto max-w-6xl">
+        <header class="section-head">
+          <span class="section-tag"><i class="fa-solid fa-envelope"></i> Contact</span>
+          <h2 class="section-title">Laten we <span class="text-gradient">in contact komen</span></h2>
+          <p class="section-sub">Project samen maken, stageplek of gewoon een vraag? Ik hoor graag van je!</p>
+        </header>
+
+        <div class="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+          <a class="contact-card reveal" href="mailto:qwinte@gmail.com">
+            <span class="contact-icon"><i class="fa-solid fa-envelope"></i></span>
+            <div>
+              <h3>E-mail</h3>
+              <p>qwinte@gmail.com</p>
+            </div>
+          </a>
+          <a class="contact-card reveal" href="tel:+32491953867">
+            <span class="contact-icon"><i class="fa-solid fa-phone"></i></span>
+            <div>
+              <h3>Telefoon</h3>
+              <p>+32 491 95 38 67</p>
+            </div>
+          </a>
+          <a class="contact-card reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+            <span class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></span>
+            <div>
+              <h3>LinkedIn</h3>
+              <p>Qwinte De Valck</p>
+            </div>
+          </a>
+          <a class="contact-card reveal" href="https://github.com/" target="_blank" rel="noopener">
+            <span class="contact-icon"><i class="fa-brands fa-github"></i></span>
+            <div>
+              <h3>GitHub</h3>
+              <p>github.com/qwinte</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="mt-10 text-center reveal">
+          <a href="mailto:qwinte@gmail.com" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> Stuur me een e-mail
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="border-t border-white/10 px-5 py-8">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-center text-sm text-slate-500">
+      <p>&copy; <span id="year"></span> Gebouwd door <strong class="text-white">Qwinte De Valck</strong> — Multimedia & Creative Technology.</p>
+      <div class="flex items-center gap-3">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:qwinte@gmail.com" aria-label="E-mail" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Knop "Terug naar boven" -->
+  <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- ============================================================
+       PROJECT DETAIL MODAL
+       ============================================================ -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box glass">
+      <button class="modal-close" data-close aria-label="Sluiten"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- Media: placeholder voor video/slider/afbeelding -->
+      <div class="modal-media" id="modal-media"></div>
+
+      <!-- 3D-viewer (getoond voor projecten met een .glb model) -->
+      <div class="modal-viewer" id="modal-viewer" hidden></div>
+
+      <div class="p-6 sm:p-8">
+        <span class="modal-cat" id="modal-cat"></span>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="text-slate-400" id="modal-summary"></p>
+
+        <hr class="my-6 border-white/10" />
+
+        <!-- Context van het project -->
+        <h4 class="modal-h"><i class="fa-solid fa-circle-info"></i> Context</h4>
+        <p class="modal-p" id="modal-context"></p>
+
+        <!-- Mijn rol -->
+        <h4 class="modal-h"><i class="fa-solid fa-user-tie"></i> Mijn rol</h4>
+        <p class="modal-p" id="modal-role"></p>
+
+        <!-- Uitdagingen -->
+        <h4 class="modal-h"><i class="fa-solid fa-triangle-exclamation"></i> Uitdagingen</h4>
+        <p class="modal-p" id="modal-challenges"></p>
+
+        <!-- Technieken & tools -->
+        <h4 class="modal-h"><i class="fa-solid fa-wrench"></i> Technieken & tools</h4>
+        <div class="mb-7 flex flex-wrap gap-2" id="modal-tech"></div>
+
+        <div class="flex flex-wrap gap-3" id="modal-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: 3D-viewer (module) eerst, dan de rest -->
+  <script type="module" src="viewer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
